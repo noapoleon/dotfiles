@@ -1,0 +1,49 @@
+##---------- Other programs or scripts (super + ctrl) ----------##
+# Redshift
+super + ctrl + o
+	redshift -P -O 5000 # turn on
+
+super + ctrl + p
+	redshift -x # turn off
+
+# Volume control
+super + F5
+	pactl set-sink-volume 1 +5%
+
+super + F6
+	pactl set-sink-volume 1 -5%
+
+super + F7
+	pactl set-sink-volume 1 toggle
+
+# restart sxhkd
+super + BackSpace
+	pkill -USR1 -x sxhkd
+
+# selection screenshot
+super + Print
+	flameshot gui
+
+# kill window
+super + shift + Escape
+	xkill
+
+##---------- Applications (super + alt) ----------##
+
+# File manager
+super + alt + f
+	thunar
+
+# Browser
+super + alt + e
+	firefox
+
+##---------- System Keys ----------##
+
+# TDrop
+super + alt + Return
+	tdrop -ma -A -w 50% -x 25% -s dropdown alacritty
+
+# powermenu
+super + x
+	sh ~/.bin/powermenu
