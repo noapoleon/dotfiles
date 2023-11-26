@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="rkj-repos"
+ZSH_THEME="jonathan"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -106,12 +106,28 @@ source $ZSH/oh-my-zsh.sh
 
 ### Coding ###
 alias gccw="gcc -Wall -Wextra -Werror"
+alias clangw="clang -Wall -Wextra -Werror"
+alias ccw="cc -Wall -Wextra -Werror"
 export PATH="$HOME/.local/bin:$PATH"
 alias normiSource="norminette -R CheckForbiddenSourceHeader"
 alias normiHeader="norminette -R CheckDefine"
+alias zim="vim"
+alias valf="valgrind --track-fds=all --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
+alias valf2="valgrind --track-fds=all --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 
 ### SSH STUFF ###
 #ssh-add ~/.ssh/vmfb_id_25519
+
+#Enable Vi mode
+bindkey -v
+
+### Other ###
+export GF=vesa
+export EDITOR=/usr/bin/vim
+export NNN_USE_EDITOR=1
+export PROJ="/home/noa/Coding/42/cursus/05-cpp"
+export CURSUS="/home/noa/Coding/42/cursus"
+alias wp_rl="feh --no-fehbg --bg-fill '/home/noa/.config/wallpaper/pixelart_ruins_girl_trees.png'"
 
 #############################
 # ---- NOA END CONFIG ----- #
