@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="jonathan"
+#ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,7 +72,7 @@ ZSH_THEME="jonathan"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -104,30 +104,34 @@ source $ZSH/oh-my-zsh.sh
 # --- NOA CUSTOM CONFIG --- #
 #############################
 
+# Changing default behavior
+export ZSH="$HOME/.config/oh-my-zsh"
+ZSH_THEME="noapoleon"
+source $ZSH/oh-my-zsh.sh
+bindkey -v
+export EDITOR=/usr/local/bin/nvim
+export NNN_USE_EDITOR=1
+export PATH="$HOME/.local/bin:$PATH"
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
 ### Coding ###
+# Compilers
 alias gccw="gcc -Wall -Wextra -Werror"
 alias clangw="clang -Wall -Wextra -Werror"
 alias ccw="cc -Wall -Wextra -Werror"
-export PATH="$HOME/.local/bin:$PATH"
+# norminette
 alias normiSource="norminette -R CheckForbiddenSourceHeader"
 alias normiHeader="norminette -R CheckDefine"
-alias zim="vim"
-alias valf="valgrind --track-fds=all --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
-alias valf2="valgrind --track-fds=all --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
-
-### SSH STUFF ###
-#ssh-add ~/.ssh/vmfb_id_25519
-
-#Enable Vi mode
-bindkey -v
-
-### Other ###
-export GF=vesa
-export EDITOR=/usr/bin/vim
-export NNN_USE_EDITOR=1
-export PROJ="/home/noa/Coding/42/cursus/05-cpp"
-export CURSUS="/home/noa/Coding/42/cursus"
-alias wp_rl="feh --no-fehbg --bg-fill '/home/noa/.config/wallpaper/pixelart_ruins_girl_trees.png'"
+# Debug
+alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
+alias valf2="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
+# Environment config
+export CURSUS="/home/noa/Coding/42"
+export PROJ="$CURSUS/05-webserv"
+alias proj="cd $PROJ"
+alias coding="tmuxifier s coding"
+eval "$(tmuxifier init -)"
 
 #############################
 # ---- NOA END CONFIG ----- #
