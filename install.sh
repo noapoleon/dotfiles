@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exit #not ready yet
-
 # COLORS
 COL_GREEN="\033[32m"
 COL_BLUE="\033[34m"
@@ -34,7 +32,7 @@ fi
 
 # Checking dependencies
 printf "${COL_BLUE}[ Checking dependencies ]${COL_RST}\n"
-deps=("git" "curl" "zsh"
+deps=("git" "curl" "zsh")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
@@ -50,24 +48,35 @@ if [[ $has_all_deps = false ]]; then
 fi
 printf "Done.\n"
 
-exit
 # Backup current config
 printf "${COL_BLUE}[ Backing up configs ]${COL_RST}\n"
 backup_dir=$HOME/.dotfiles.pre-noastreos.bak/backup_$(date +"%Yy%mm%dd_%Hh%Mm%Ss")
-printf "Creating backup directory: $backup_dir"
+printf "Creating backup directory: ${backup_dir}\n"
 if ! mkdir -p $backup_dir; then
 	printf "${COL_ERR}Error:${COL_RST} Failed to create backup directory\n"
 	halt_install
 fi
 configs=("tmux" "nvim")
-for str in "${deps[@]}" ; do
-	if -d $HOME/.config/${str} ; then
+for str in "${configs[@]}" ; do
+	if [[ -d $HOME/.config/${str} ]] ; then
 		if ! cp -r $HOME/.config/${str} ${backup_dir}/.config; then
+			printf "${COL_ERR}Error:${COL_RST} Failed to backup ${str}\n"
+			halt_install
+		fi
+	fi
+done
+for str in "${configs[@]}" ; do
+	if ! rm -rf $HOME/.config/${str} &&
+		cp -r $HOME/.config/${str} ${backup_dir}/.config
+	then
+		printf "${COL_ERR}Error:${COL_RST} Failed to backup ${str}\n"
+		halt_install
 	fi
 done
 # copy zshrc
 
-# Install tmux plugins
+### Install tmux plugins
+mkdir $HOME/.config/tmux/plugins
 git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
 sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmuxifier
