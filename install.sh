@@ -32,7 +32,7 @@ fi
 
 # Checking dependencies
 printf "${COL_BLUE}[ Checking dependencies ]${COL_RST}\n"
-deps=("git" "curl" "zsh")
+deps=("git" "curl" "zsh" "tmux")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
