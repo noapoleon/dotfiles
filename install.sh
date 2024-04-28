@@ -54,7 +54,7 @@ fi
 printf "Done.\n"
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/exec zsh -l')" "" --keep-zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')" "" --keep-zshrc
 
 # Backup current config
 printf "${COL_SECTION}[ Installing configs ]${COL_RST}\n"
@@ -65,7 +65,7 @@ function install_config() {
 		halt_install
 	fi
 	if [[ -e $HOME/$1 ]] ; then
-		if ! [[ mkdir -p $(dirname $backup_dir/$1) && cp -r $HOME/$1 $backup_dir/$1 ]] ; then
+		if ! mkdir -p $(dirname $backup_dir/$1) && cp -r $HOME/$1 $backup_dir/$1 ; then
 			printf "${COL_ERR}Error:${COL_RST} Failed to backup ${HOME}/$1 to $backup_dir/$1\n"
 			halt_install
 		fi
