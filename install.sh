@@ -53,8 +53,15 @@ if [[ $has_all_deps = false ]]; then
 fi
 printf "Done.\n"
 
+# Creating XDG config home
+if ! mkdir -p $HOME/.config ; then
+	printf "${COL_ERROR}Error:${COL_RST} Failed to create XDG config home"
+	halt_install
+fi
+
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')" "" --keep-zshrc
+mv $HOME/.oh-my-zsh $HOME/.config/oh-my-zsh
 
 # Backup current config
 printf "${COL_SECTION}[ Installing configs ]${COL_RST}\n"
@@ -70,7 +77,7 @@ function install_config() {
 			halt_install
 		fi
 	fi
-	if ! [[ rm -rf $HOME/$1 && cp -r $1 $HOME/$1 ]] ; then
+	if ! rm -rf $HOME/$1 && cp -r $1 $HOME/$1 ; then
 		printf "${COL_ERR}Error:${COL_RST} Failed to install $1  in $HOME/$1\n"
 		# attempt to reinstall previous configs with backups? it's 6am not now
 		halt_install
