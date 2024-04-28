@@ -27,7 +27,7 @@ function halt_install() {
 }
 
 ### Main install start!!!
-printf "${COL_START}[ Installing Noapoleon dotfiles... ]${COL_RST}\n\n"
+printf "${COL_START}[ Installing Noastraeus dotfiles... ]${COL_RST}\n\n"
 
 # Stop if HOME variable doesn't exists
 if [[ -z "$HOME" ]]; then
@@ -37,7 +37,7 @@ fi
 
 # Checking dependencies
 printf "${COL_SECTION}[ Checking dependencies ]${COL_RST}\n"
-deps=("git" "curl" "zsh" "tmux")
+deps=("git" "curl" "zsh" "tmux" "nvim")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
@@ -51,25 +51,25 @@ done
 if [[ $has_all_deps = false ]]; then
 	halt_install
 fi
-printf "Done.\n"
+printf "All good.\n"
 
 # Creating XDG config home
 if ! mkdir -p $HOME/.config ; then
-	printf "${COL_ERROR}Error:${COL_RST} Failed to create XDG config home"
+	printf "${COL_ERROR}Error:${COL_RST} Failed to create XDG config home\n"
 	halt_install
 fi
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')" "" --keep-zshrc
-mv $HOME/.oh-my-zsh $HOME/.config/oh-my-zsh
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/exec zsh/d')" "" --keep-zshrc
+#mv $HOME/.oh-my-zsh $HOME/.config/oh-my-zsh
 
 # Backup current config
 printf "${COL_SECTION}[ Installing configs ]${COL_RST}\n"
-backup_dir=$HOME/.dotfiles.pre-noastreos.bak/backup_$(date +"%Yy%mm%dd_%Hh%Mm%Ss")
+backup_dir=$HOME/.dotfiles.pre-noastraeus.bak/backup_$(date +"%Yy%mm%dd_%Hh%Mm%Ss")
 function install_config() {
 	if [[ $# -ne 1 || $1 == "" ]]; then
 		print "${COL_ERROR}[Error]:${COL_RST} Not enough arguments for backup"
-		halt_install
+		halt_install # maybe dont halt install here, just skip this file install and put warning message
 	fi
 	if [[ -e $HOME/$1 ]] ; then
 		if ! mkdir -p $(dirname $backup_dir/$1) && cp -r $HOME/$1 $backup_dir/$1 ; then
@@ -77,12 +77,19 @@ function install_config() {
 			halt_install
 		fi
 	fi
-	if ! rm -rf $HOME/$1 && cp -r $1 $HOME/$1 ; then
+	if ! rm -rf $HOME/$1 && cp -r $DIR/$1 $HOME/$1 ; then
 		printf "${COL_ERR}Error:${COL_RST} Failed to install $1  in $HOME/$1\n"
 		# attempt to reinstall previous configs with backups? it's 6am not now
 		halt_install
 	fi
-	printf "Installed $HOME/$1"
+
+	printf "debug: 1 -> $(dirname $backup_dir/$1), 2 -> $HOME/$1 and $backup_dir/$1, 3 -> $HOME/$1, 4 -> $DIR/$1 $HOME/$1\n"
+	
+	#mkdir -p $(dirname $backup_dir/$1)
+	#cp -r $HOME/$1 $backup_dir/$1
+	#rm -rf $HOME/$1
+	#cp -r $DIR/$1 $HOME/$1
+	printf "Installed $HOME/$1\n"
 }
 if ! mkdir -p $backup_dir; then
 	printf "${COL_ERR}Error:${COL_RST} Failed to create backup directory $backup_dir\n"
@@ -101,15 +108,17 @@ install_config .zshrc
 ### Install tmux plugins
 mkdir -p $HOME/.config/tmux/plugins
 git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
-sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
+#sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmuxifier
 mkdir -p $HOME/.local/bin
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
 
 # Go in zsh
-exec zsh -l
+#exec zsh -l
 
 ### Future Additions ###
 # 
 # - backup directory option: ./install -backup=<dir>
 # - font installation and fc-cache thing
+# - install neovim locally in .local/bin
+# - safer install process, first create all of the backups then start installing stuff
