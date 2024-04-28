@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# COLORS
+# Colors
 COL_GREEN="\033[32m"
 COL_BLUE="\033[34m"
-COL_ERR="\033[31m"
-COL_WRN="\033[33m"
+# Named Colors
+COL_START="\033[32;7;1m"
+COL_SECTION="\033[34;4;1m"
+COL_ERR="\033[31;1m"
+COL_WRN="\033[33;1m"
+COL_INFO="\033[33;3;1m"
 COL_RST="\033[0m"
 
 # Get script absolute path
@@ -16,13 +20,14 @@ while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
+# Helper function
 function halt_install() {
 	printf "\n${COL_WRN}Halting installation...${COL_WRN}\n"
 	exit 1
 }
 
 ### Main install start!!!
-printf "${COL_GREEN}[ Installing Noapoleon dotfiles... ]${COL_RST}\n\n"
+printf "${COL_START}[ Installing Noapoleon dotfiles... ]${COL_RST}\n\n"
 
 # Stop if HOME variable doesn't exists
 if [[ -z "$HOME" ]]; then
@@ -31,7 +36,7 @@ if [[ -z "$HOME" ]]; then
 fi
 
 # Checking dependencies
-printf "${COL_BLUE}[ Checking dependencies ]${COL_RST}\n"
+printf "${COL_SECTION}[ Checking dependencies ]${COL_RST}\n"
 deps=("git" "curl" "zsh" "tmux")
 has_all_deps=true
 for str in "${deps[@]}" ; do
@@ -48,32 +53,43 @@ if [[ $has_all_deps = false ]]; then
 fi
 printf "Done.\n"
 
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/exec zsh -l')" "" --keep-zshrc
+
 # Backup current config
-printf "${COL_BLUE}[ Backing up configs ]${COL_RST}\n"
+printf "${COL_SECTION}[ Installing configs ]${COL_RST}\n"
 backup_dir=$HOME/.dotfiles.pre-noastreos.bak/backup_$(date +"%Yy%mm%dd_%Hh%Mm%Ss")
-printf "Creating backup directory: ${backup_dir}\n"
-if ! mkdir -p $backup_dir; then
-	printf "${COL_ERR}Error:${COL_RST} Failed to create backup directory\n"
-	halt_install
-fi
-configs=("tmux" "nvim")
-for str in "${configs[@]}" ; do
-	if [[ -d $HOME/.config/${str} ]] ; then
-		if ! cp -r $HOME/.config/${str} ${backup_dir}/.config; then
-			printf "${COL_ERR}Error:${COL_RST} Failed to backup ${str}\n"
+function install_config() {
+	if [[ $# -ne 1 || $1 == "" ]]; then
+		print "${COL_ERROR}[Error]:${COL_RST} Not enough arguments for backup"
+		halt_install
+	fi
+	if [[ -e $HOME/$1 ]] ; then
+		if ! [[ mkdir -p $(dirname $backup_dir/$1) && cp -r $HOME/$1 $backup_dir/$1 ]] ; then
+			printf "${COL_ERR}Error:${COL_RST} Failed to backup ${HOME}/$1 to $backup_dir/$1\n"
 			halt_install
 		fi
 	fi
-done
-for str in "${configs[@]}" ; do
-	if ! rm -rf $HOME/.config/${str} &&
-		cp -r $HOME/.config/${str} ${backup_dir}/.config
-	then
-		printf "${COL_ERR}Error:${COL_RST} Failed to backup ${str}\n"
+	if ! [[ rm -rf $HOME/$1 && cp -r $1 $HOME/$1 ]] ; then
+		printf "${COL_ERR}Error:${COL_RST} Failed to install $1  in $HOME/$1\n"
+		# attempt to reinstall previous configs with backups? it's 6am not now
 		halt_install
 	fi
+	printf "Installed $HOME/$1"
+}
+if ! mkdir -p $backup_dir; then
+	printf "${COL_ERR}Error:${COL_RST} Failed to create backup directory $backup_dir\n"
+	halt_install
+else
+	printf "${COL_INFO}Backup directory:${COL_RST} $backup_dir\n"
+fi
+# XDG Configs
+configs=("tmux" "nvim" "oh-my-zsh")
+for str in "${configs[@]}" ; do
+	install_config .config/$str 
 done
-# copy zshrc
+# Other Configs
+install_config .zshrc
 
 ### Install tmux plugins
 mkdir -p $HOME/.config/tmux/plugins
@@ -83,11 +99,8 @@ git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmux
 mkdir -p $HOME/.local/bin
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
 
-# Install oh-my-zsh
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Check if existence of oh-my-zsh folder prevents installation
-# because noapoleon theme needs to be copied into its theme folder
-# otherwise the .zshrc will have an error when requesting the noapoleon theme
+# Go in zsh
+exec zsh -l
 
 ### Future Additions ###
 # 
