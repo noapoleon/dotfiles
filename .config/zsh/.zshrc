@@ -107,6 +107,7 @@ plugins=(git)
 # Changing default behavior
 export ZSH="$HOME/.config/oh-my-zsh"
 ZSH_THEME="noastrum"
+export HISTFILE=$HOME/.config/zsh/.zsh_history
 source $ZSH/oh-my-zsh.sh
 bindkey -v
 export EDITOR=/usr/local/bin/nvim

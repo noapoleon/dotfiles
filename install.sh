@@ -19,21 +19,12 @@ done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 # Helper function
 function halt_install() {
-	printf "\n${COL_WRN}Halting installation...${COL_WRN}\n"
+	printf "\n${COL_WRN}Halting installation...${COL_RST}\n"
 	exit 1
 }
 
 # Install warnings and prompt
-printf "${COL_HEADER}[ ----- Noastrum Dotfiles Install Utility ----- ]${COL_RST}\n\n"
-printf "${COL_WRN}This utility will move your existing conflicting configs to its directory using stow${COL_RST}\n"
-printf "Do you wish to proceed anyway?\n"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) break;;
-        No ) exit;;
-    esac
-done
-printf "\n${COL_START}[ ### Installing Noastrum dotfiles ### ]${COL_RST}\n\n"
+printf "\n${COL_START}[ ### Noastrum Dotfiles Install Utility ### ]${COL_RST}\n\n"
 
 # Stop if HOME variable doesn't exists
 if [[ -z "$HOME" ]]; then
