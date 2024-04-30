@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# Colors
-COL_GREEN="\033[32m"
-COL_BLUE="\033[34m"
 # Named Colors
-COL_START="\033[32;7;1m"
-COL_SECTION="\033[34;4;1m"
-COL_ERR="\033[31;1m"
-COL_WRN="\033[33;1m"
-COL_INFO="\033[33;3;1m"
+COL_HEADER="\033[32;7m"
+COL_START="\033[32m"
+COL_SECTION="\033[34m"
+COL_ERR="\033[31m"
+COL_WRN="\033[33m"
+COL_INFO="\033[33m"
 COL_RST="\033[0m"
 
 # Get script absolute path
@@ -19,25 +17,33 @@ while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
   [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
-
 # Helper function
 function halt_install() {
 	printf "\n${COL_WRN}Halting installation...${COL_WRN}\n"
 	exit 1
 }
 
-### Main install start!!!
-printf "${COL_START}[ Installing Noastraeus dotfiles... ]${COL_RST}\n\n"
+# Install warnings and prompt
+printf "${COL_HEADER}[ ----- Noastrum Dotfiles Install Utility ----- ]${COL_RST}\n\n"
+printf "${COL_WRN}This utility will move your existing conflicting configs to its directory using stow${COL_RST}\n"
+printf "Do you wish to proceed anyway?\n"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+printf "\n${COL_START}[ ### Installing Noastrum dotfiles ### ]${COL_RST}\n\n"
 
 # Stop if HOME variable doesn't exists
 if [[ -z "$HOME" ]]; then
-	printf "${COL_ERR}Error:${COL_RST} Home directory not set, cannot proceed with installation\n"
+	printf "${COL_ERR}Error:${COL_RST} HOME directory not set, cannot proceed with installation\n"
 	halt_install
 fi
 
 # Checking dependencies
-printf "${COL_SECTION}[ Checking dependencies ]${COL_RST}\n"
-deps=("git" "curl" "zsh" "tmux" "nvim")
+printf "${COL_SECTION}[ --- Checking dependencies --- ]${COL_RST}\n"
+deps=("git" "curl" "zsh" "tmux" "nvim" "stow")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
@@ -53,72 +59,42 @@ if [[ $has_all_deps = false ]]; then
 fi
 printf "All good.\n"
 
-# Creating XDG config home
-if ! mkdir -p $HOME/.config ; then
-	printf "${COL_ERROR}Error:${COL_RST} Failed to create XDG config home\n"
+# Stow
+printf "${COL_SECTION}[ --- Stowing dotfiles --- ]${COL_RST}\n"
+if ! stow . ; then
+	printf "${COL_ERR}Error:${COL_RST} Stow failed to deploy symlinks because of conflicts. Resolve them and try again.\n"
 	halt_install
 fi
 
 # Install oh-my-zsh
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/exec zsh/d')" "" --keep-zshrc
-#mv $HOME/.oh-my-zsh $HOME/.config/oh-my-zsh
-
-# Backup current config
-printf "${COL_SECTION}[ Installing configs ]${COL_RST}\n"
-backup_dir=$HOME/.dotfiles.pre-noastraeus.bak/backup_$(date +"%Yy%mm%dd_%Hh%Mm%Ss")
-function install_config() {
-	if [[ $# -ne 1 || $1 == "" ]]; then
-		print "${COL_ERROR}[Error]:${COL_RST} Not enough arguments for backup"
-		halt_install # maybe dont halt install here, just skip this file install and put warning message
-	fi
-	if [[ -e $HOME/$1 ]] ; then
-		if ! mkdir -p $(dirname $backup_dir/$1) && cp -r $HOME/$1 $backup_dir/$1 ; then
-			printf "${COL_ERR}Error:${COL_RST} Failed to backup ${HOME}/$1 to $backup_dir/$1\n"
-			halt_install
-		fi
-	fi
-	if ! rm -rf $HOME/$1 && cp -r $DIR/$1 $HOME/$1 ; then
-		printf "${COL_ERR}Error:${COL_RST} Failed to install $1  in $HOME/$1\n"
-		# attempt to reinstall previous configs with backups? it's 6am not now
-		halt_install
-	fi
-
-	printf "debug: 1 -> $(dirname $backup_dir/$1), 2 -> $HOME/$1 and $backup_dir/$1, 3 -> $HOME/$1, 4 -> $DIR/$1 $HOME/$1\n"
-	
-	#mkdir -p $(dirname $backup_dir/$1)
-	#cp -r $HOME/$1 $backup_dir/$1
-	#rm -rf $HOME/$1
-	#cp -r $DIR/$1 $HOME/$1
-	printf "Installed $HOME/$1\n"
-}
-if ! mkdir -p $backup_dir; then
-	printf "${COL_ERR}Error:${COL_RST} Failed to create backup directory $backup_dir\n"
+printf "${COL_SECTION}[ --- Installing oh-my-zsh --- ]${COL_RST}\n"
+export ZSH="$HOME/.config/oh-my-zsh" 
+if ! sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/exec zsh/d')" "" --keep-zshrc ; then
+	printf "${COL_ERR}Error:${COL_RST} Failed\n"
 	halt_install
 else
-	printf "${COL_INFO}Backup directory:${COL_RST} $backup_dir\n"
+	# Copy custom theme
+	if ! cp $DIR/assets/noastrum.zsh-theme $HOME/.config/oh-my-zsh/themes/ ; then
+		printf "${COL_WRN}Warning:${COL_RST} Failed to copy Noastrum zsh theme"
+	fi
 fi
-# XDG Configs
-configs=("tmux" "nvim" "oh-my-zsh")
-for str in "${configs[@]}" ; do
-	install_config .config/$str 
-done
-# Other Configs
-install_config .zshrc
 
 ### Install tmux plugins
-mkdir -p $HOME/.config/tmux/plugins
-git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
-#sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
-git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmuxifier
-mkdir -p $HOME/.local/bin
+mkdir -p $HOME/.config/tmux/plugins &&
+git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm &&
+sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh &&
+git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmuxifier &&
+mkdir -p $HOME/.local/bin &&
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
 
+# Goodbye
+printf "\n${COL_START}[ ### Noastrum dotfiles installed ### ]${COL_RST}\n\n"
+
 # Go in zsh
-#exec zsh -l
+exec zsh -l
 
 ### Future Additions ###
 # 
 # - backup directory option: ./install -backup=<dir>
 # - font installation and fc-cache thing
 # - install neovim locally in .local/bin
-# - safer install process, first create all of the backups then start installing stuff

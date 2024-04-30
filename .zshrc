@@ -106,7 +106,7 @@ plugins=(git)
 
 # Changing default behavior
 export ZSH="$HOME/.config/oh-my-zsh"
-ZSH_THEME="noapoleon"
+ZSH_THEME="noastrum"
 source $ZSH/oh-my-zsh.sh
 bindkey -v
 export EDITOR=/usr/local/bin/nvim
@@ -115,20 +115,18 @@ export PATH="$HOME/.local/bin:$PATH"
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 
+# Convenience
+bak() { # to add: support for multiple files, unbak functionality (needs to check for .bak extension)
+	mv "$1" "${1}.bak"
+}
+
 ### Coding ###
-# Compilers
-alias gccw="gcc -Wall -Wextra -Werror"
-alias clangw="clang -Wall -Wextra -Werror"
-alias ccw="cc -Wall -Wextra -Werror"
-# norminette
-alias normiSource="norminette -R CheckForbiddenSourceHeader"
-alias normiHeader="norminette -R CheckDefine"
 # Debug
 alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
 alias valf2="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 # Environment config
 export CURSUS="/home/noa/Coding/42"
-export PROJ="$CURSUS/05-webserv"
+export PROJ="$CURSUS/05-webserv/webserv"
 alias proj="cd $PROJ"
 alias coding="tmuxifier s coding"
 eval "$(tmuxifier init -)"
