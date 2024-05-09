@@ -34,7 +34,7 @@ fi
 
 # Checking dependencies
 printf "${COL_SECTION}[ --- Checking dependencies --- ]${COL_RST}\n"
-deps=("git" "curl" "zsh" "tmux" "nvim" "stow")
+deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" )
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then

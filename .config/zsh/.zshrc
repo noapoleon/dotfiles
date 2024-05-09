@@ -126,8 +126,8 @@ bak() { # to add: support for multiple files, unbak functionality (needs to chec
 alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
 alias valf2="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 # Environment config
-export CURSUS="/home/noa/Coding/42"
-export PROJ="$CURSUS/05-webserv/webserv"
+export CURSUS="$HOME/Coding/42"
+export PROJ="$CURSUS/05-inception/inception"
 alias proj="cd $PROJ"
 alias coding="tmuxifier s coding"
 eval "$(tmuxifier init -)"
