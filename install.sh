@@ -34,7 +34,7 @@ fi
 
 # Checking dependencies
 printf "${COL_SECTION}[ --- Checking dependencies --- ]${COL_RST}\n"
-deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" )
+deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" "unzip")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
@@ -78,6 +78,18 @@ git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmux
 mkdir -p $HOME/.local/bin
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
 
+# Install nerd fonts
+if [ -e $HOME/.local/share/fonts/JetBrainsMono ] ; then
+	rm -rf $HOME/.local/share/fonts/JetBrainsMono
+fi
+mkdir -p $HOME/.local/share/fonts/JetBrainsMono &&
+cd $HOME/.local/share/fonts/JetBrainsMono &&
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip &&
+unzip -q JetBrainsMono.zip &&
+rm -rf JetBrainsMono.zip &&
+fc-cache -f -v > /dev/null
+
+
 # Goodbye
 printf "\n${COL_START}[ ### Noastrum dotfiles installed ### ]${COL_RST}\n\n"
 
@@ -87,5 +99,5 @@ exec zsh -l
 ### Future Additions ###
 # 
 # - backup directory option: ./install -backup=<dir>
-# - font installation and fc-cache thing
 # - install neovim locally in .local/bin
+# - more error detection and messages
