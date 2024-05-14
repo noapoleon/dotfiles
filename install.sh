@@ -88,6 +88,7 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsM
 unzip -q JetBrainsMono.zip &&
 rm -rf JetBrainsMono.zip &&
 fc-cache -f -v > /dev/null
+cd -
 
 
 # Goodbye
