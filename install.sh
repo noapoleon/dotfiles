@@ -103,3 +103,4 @@ exec zsh -l
 # - install neovim locally in .local/bin
 # - more error detection and messages
 # - copy tmuxifier session layout for coding
+# - break up script install multiple smaller ones that can be called individually
