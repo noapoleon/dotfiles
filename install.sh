@@ -101,3 +101,4 @@ exec zsh -l
 # - backup directory option: ./install -backup=<dir>
 # - install neovim locally in .local/bin
 # - more error detection and messages
+# - copy tmuxifier session layout for coding
