@@ -24,7 +24,7 @@ function halt_install() {
 }
 
 # Install warnings and prompt
-printf "\n${COL_START}[ ### Noastrum Dotfiles Install Utility ### ]${COL_RST}\n\n"
+printf "\n${COL_START}[ ### oapoleon Dotfiles Install Utility ### ]${COL_RST}\n\n"
 
 # Stop if HOME variable doesn't exists
 if [[ -z "$HOME" ]]; then
@@ -51,8 +51,8 @@ if ! sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/maste
 	halt_install
 else
 	# Copy custom theme
-	if ! cp $DIR/assets/noastrum.zsh-theme $HOME/.config/oh-my-zsh/themes/ ; then
-		printf "${COL_WRN}Warning:${COL_RST} Failed to copy Noastrum zsh theme"
+	if ! cp $DIR/assets/noapoleon.zsh-theme $HOME/.config/oh-my-zsh/themes/ ; then
+		printf "${COL_WRN}Warning:${COL_RST} Failed to copy Noapoleon zsh theme"
 	fi
 fi
 
@@ -65,7 +65,7 @@ mkdir -p $HOME/.local/bin
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
 
 # Goodbye
-printf "\n${COL_START}[ ### Noastrum dotfiles installed ### ]${COL_RST}\n\n"
+printf "\n${COL_START}[ ### Noapoleon dotfiles installed ### ]${COL_RST}\n\n"
 
 # Go in zsh
 exec zsh -l
