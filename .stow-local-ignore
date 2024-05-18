@@ -1,5 +1,9 @@
+.git
+
 assets
+tmp
+scripts
+
 install.sh
 uninstall.sh
 .vimrc
-.git
