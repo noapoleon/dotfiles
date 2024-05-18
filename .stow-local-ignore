@@ -1,4 +1,5 @@
+assets
 install.sh
 uninstall.sh
-assets
+.vimrc
 .git
