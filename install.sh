@@ -34,21 +34,7 @@ fi
 
 # Checking dependencies
 printf "${COL_SECTION}[ --- Checking dependencies --- ]${COL_RST}\n"
-deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" "unzip")
-has_all_deps=true
-for str in "${deps[@]}" ; do
-	if ! command -v ${str} > /dev/null ; then
-		if [[ $has_all_deps = true ]]; then
-			has_all_deps=false
-			printf "${COL_ERR}Error:${COL_RST} Unmet dependencies, please install the following:\n"
-		fi
-		printf " ${COL_ERR}-${COL_RST} ${str}\n"
-	fi
-done
-if [[ $has_all_deps = false ]]; then
-	halt_install
-fi
-printf "All good.\n"
+sh scripts/check_deps.sh
 
 # Stow
 printf "${COL_SECTION}[ --- Stowing dotfiles --- ]${COL_RST}\n"
@@ -77,19 +63,6 @@ $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 git clone https://github.com/jimeh/tmuxifier.git $HOME/.config/tmux/plugins/tmuxifier &&
 mkdir -p $HOME/.local/bin
 ln -s $HOME/.config/tmux/plugins/tmuxifier/bin/tmuxifier $HOME/.local/bin/tmuxifier
-
-# Install nerd fonts
-if [ -e $HOME/.local/share/fonts/JetBrainsMono ] ; then
-	rm -rf $HOME/.local/share/fonts/JetBrainsMono
-fi
-mkdir -p $HOME/.local/share/fonts/JetBrainsMono &&
-cd $HOME/.local/share/fonts/JetBrainsMono &&
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip &&
-unzip -q JetBrainsMono.zip &&
-rm -rf JetBrainsMono.zip &&
-fc-cache -f -v > /dev/null
-cd -
-
 
 # Goodbye
 printf "\n${COL_START}[ ### Noastrum dotfiles installed ### ]${COL_RST}\n\n"
