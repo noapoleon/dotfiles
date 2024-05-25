@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
-PATH_PREFIX=/usr/local
+if [[ -z $PATH_PREFIX ]]; then
+	export PATH_PREFIX=$HOME/.local/bin/
+fi
+
+read -r -p "Installing neovim to $PATH_PREFIX? [Y/n]" response
+response=${response,,} # tolower
+if [[ ! $response =~ ^(y| ) ]] && [[ ! -z $response ]]; then
+	printf "Cancelling install..."
+	exit
+fi
 
 # Get latest release, unzip and install it
+mkdir -p $PATH_PREFIX
 if [ -w $PATH_PREFIX ]; then
-	rm -rf nvim-linux64.tar.gz nvim-linux64 $PATH_PREFIX/nvim &&
-	wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz &&
-	tar xzf nvim-linux64.tar.gz
-	cp -r nvim-linux64/* $PATH_PREFIX/
-	cp -r nvim-linux64/man/* $PATH_PREFIX/man/
-	rm -rf nvim-linux64.tar.gz nvim-linux64
+	wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
+	&& chmod 755 nvim.appimage \
+	&& rm -rf $PATH_PREFIX/nvim \
+	&& mv nvim.appimage $PATH_PREFIX/nvim
 else
-	printf "Error: no write permission to $PATH_PREFIX\n"
+	printf "Error: can't write to $PATH_PREFIX\n"
 	exit 1
 fi
 

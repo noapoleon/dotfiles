@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" "unzip")
+deps=("git" "curl" "zsh" "tmux" "nvim" "vim" "stow" "npm" "gcc" "clang" "unzip" "ripgrep")
 has_all_deps=true
 for str in "${deps[@]}" ; do
 	if ! command -v ${str} > /dev/null ; then
