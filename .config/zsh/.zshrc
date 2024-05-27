@@ -106,7 +106,7 @@ plugins=(git)
 
 # Changing default behavior
 export ZSH="$HOME/.config/oh-my-zsh"
-ZSH_THEME="noastrum"
+ZSH_THEME="noapoleon"
 export HISTFILE=$HOME/.config/zsh/.zsh_history
 source $ZSH/oh-my-zsh.sh
 bindkey -v
@@ -117,9 +117,11 @@ bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 
 # Convenience
-bak() { # to add: support for multiple files, unbak functionality (needs to check for .bak extension)
+bak() { # to add: support for multiple files, unbak functionality (needs to check for .bak extension) and protect arguments
 	mv "$1" "${1}.bak"
 }
+alias c="clear"
+alias sszsh="source ~/.config/zsh/.zshrc"
 
 ### Coding ###
 # Debug
