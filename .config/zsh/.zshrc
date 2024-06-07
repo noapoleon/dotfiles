@@ -121,17 +121,19 @@ bak() { # to add: support for multiple files, unbak functionality (needs to chec
 	mv "$1" "${1}.bak"
 }
 alias c="clear"
-alias sszsh="source ~/.config/zsh/.zshrc"
+alias cfg_src="source ~/.config/zsh/.zshrc"
+alias cfg_edit="$EDITOR ~/.config/zsh/.zshrc"
 
 ### Coding ###
-# Debug
+# Debug valgrind
 alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
-alias valf2="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
-# Environment config
-export CURSUS="$HOME/Coding/42"
-export PROJ="$CURSUS/05-inception/inception"
-alias proj="cd $PROJ"
-alias coding="tmuxifier s coding"
+alias valfrd="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
+# 42 Cursus config
+export	CURSUS="$HOME/Coding/42/"
+alias	cursus="cd $CURSUS"
+export	PROJ="$CURSUS/05-ft_transcendence/ft_transcendence"
+alias	proj="cd $PROJ"
+alias	coding="tmuxifier s coding"
 eval "$(tmuxifier init -)"
 
 #############################
