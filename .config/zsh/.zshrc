@@ -1,39 +1,88 @@
-#############################
-# --- NOA CUSTOM CONFIG --- #
-#############################
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Changing default behavior
-export ZSH="$HOME/.config/oh-my-zsh"
-ZSH_THEME="noapoleon"
-export HISTFILE=$HOME/.config/zsh/.zsh_history
-source $ZSH/oh-my-zsh.sh
-bindkey -v
-export EDITOR=$HOME/.local/bin/nvim
-export NNN_USE_EDITOR=1
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load init
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Variables
+export TERM="xterm-256color"
+export EDITOR="$HOME/.local/bin/nvim"
 export PATH="$HOME/.local/bin:$PATH"
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
+export CURSUS="$HOME/Coding/42"
+export PROJ="$CURSUS/06-ft_transcendence/django_test"
 
-# Convenience
-bak() { # to add: support for multiple files, unbak functionality (needs to check for .bak extension) and protect arguments
-	mv "$1" "${1}.bak"
-}
-alias c="clear"
-alias cfg_src="source ~/.config/zsh/.zshrc"
-alias cfg_edit="$EDITOR ~/.config/zsh/.zshrc"
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-### Coding ###
-# Debug valgrind
-alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
-alias valfrd="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
-# 42 Cursus config
-export	CURSUS="$HOME/Coding/42"
-alias	cursus="cd $CURSUS"
-export	PROJ="$CURSUS/06-ft_transcendence/django_test"
-alias	proj="cd $PROJ"
-alias	coding="tmuxifier s coding"
-eval "$(tmuxifier init -)"
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+#zinit snippet OMZP::archlinux
+#zinit snippet OMZP::aws
+#zinit snippet OMZP::kubectl
+#zinit snippet OMZP::kubectx
+#zinit snippet OMZP::command-not-found
+# Add in snippets (noapoleon)
+#zinit snippet OMZP::docker # produces error with tee
+zinit snippet OMZP::systemd
+zinit snippet OMZP::tmux
+zinit snippet OMZP::tmuxinator
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::common-aliases
 
-#############################
-# ---- NOA END CONFIG ----- #
-#############################
+
+# Load completions
+autoload -U compinit && compinit
+
+zinit cdreplay -q
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.toml)"
+
+# Keybindings
+bindkey -e # try going back to vim
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+autoload -z edit-command-line		# 
+zle -N edit-command-line			# Edit command in editor
+bindkey "^X^E" edit-command-line	# 
+
+
+# History
+HISTSIZE=10000
+HISTFILE=$HOME/.config/zsh/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space # doesn't seem to work
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+
+# Aliases
+alias ls='ls --color'
+alias c='clear'
+alias source_zshrc='source $ZDOTDIR/.zshrc' # make a prompt save version of zshrc alias command with && read [Y/n] && source
+alias cursus="cd $CURSUS"
+alias proj="cd $PROJ"
+alias conf="$EDITOR $HOME/.config/"
+
+# Shell integrations
+eval "$(fzf --zsh)"
