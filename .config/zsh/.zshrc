@@ -82,7 +82,7 @@ alias c='clear'
 alias source_zshrc='source $ZDOTDIR/.zshrc' # make a prompt save version of zshrc alias command with && read [Y/n] && source
 alias cursus="cd $CURSUS"
 alias proj="cd $PROJ"
-alias conf="$EDITOR $HOME/.config/"
+alias conf="$EDITOR $HOME/.config/" # find way to prompt which conf to edit
 
 # Shell integrations
 eval "$(fzf --zsh)"
