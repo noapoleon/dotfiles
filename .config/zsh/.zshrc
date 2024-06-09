@@ -12,7 +12,7 @@ export DOTFILES="$HOME/Dotfiles"
 ZSH_THEME="noapoleon"
 
 # Plugins
-plugins=(git)
+plugins=(git systemd)
 
 # sourcing oh-my-zsh config
 source $ZSH/oh-my-zsh.sh
@@ -36,13 +36,14 @@ bak() {
 alias c="clear"
 alias zshrc_source="source $ZDOTDIR/.zshrc"
 alias zshrc="$EDITOR $ZDOTDIR/.zshrc"
-alias conf="$EDITOR $DOTFILES"
+alias conf="$EDITOR $DOTFILES/.config"
 alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
 alias valfrd="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 alias cursus="cd $CURSUS"
 alias proj="cd $PROJ"
 alias coding="tmuxifier s coding"
 alias dots="cd $DOTFILES"
+alias py="python3"
 
 # Load tmux
 eval "$(tmuxifier init -)"
