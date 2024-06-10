@@ -44,6 +44,7 @@ alias proj="cd $PROJ"
 alias coding="tmuxifier s coding"
 alias dots="cd $DOTFILES"
 alias py="python3"
+alias python="python3"
 
 # Load tmux
 eval "$(tmuxifier init -)"
