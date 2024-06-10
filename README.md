@@ -16,3 +16,5 @@ I like manual configs :]
 
 ### Zsh
 - [ ] Look into zinit and ohmyposh more
+- [ ] Can ohmyposh be used with ohmyzsh?
+- [ ] Move git branch name to top of prompt bar (or not, idk)
