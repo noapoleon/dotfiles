@@ -61,10 +61,10 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} %{%G✭%}"
 if [[ "${langinfo[CODESET]}" = UTF-8 ]]; then
   PR_SET_CHARSET=""
   PR_HBAR="─"
-  PR_ULCORNER="┌"
-  PR_LLCORNER="└"
-  PR_LRCORNER="┘"
-  PR_URCORNER="┐"
+  PR_ULCORNER="╭"
+  PR_LLCORNER="╰"
+  PR_LRCORNER="╯"
+  PR_URCORNER="╮"
 else
   typeset -g -A altchar
   set -A altchar ${(s..)terminfo[acsc]}
@@ -101,11 +101,11 @@ fi
 
 # Finally, the prompt.
 PROMPT='${PR_SET_CHARSET}${PR_STITLE}${(e)PR_TITLEBAR}\
-${PR_GREY}${PR_ULCORNER}${PR_HBAR}${PR_GREY}(\
+${PR_GREY}${PR_ULCORNER}${PR_HBAR}${PR_GREY}[\
 ${PR_GREEN}%${PR_PWDLEN}<...<%~%<<\
-${PR_GREY})$(ruby_prompt_info)${PR_GREY}${PR_HBAR}${PR_HBAR}${(e)PR_FILLBAR}${PR_HBAR}${PR_GREY}(\
+${PR_GREY}]$(ruby_prompt_info)${PR_GREY}${PR_HBAR}${PR_HBAR}${(e)PR_FILLBAR}${PR_HBAR}${PR_GREY}[\
 ${PR_CYAN}%(!.%SROOT%s.%n)${PR_GREY}@${PR_GREEN}%m:%l\
-${PR_GREY})${PR_GREY}${PR_HBAR}${PR_URCORNER}\
+${PR_GREY}]${PR_GREY}${PR_HBAR}${PR_URCORNER}\
 
 ${PR_GREY}${PR_LLCORNER}${PR_GREY}${PR_HBAR}(\
 ${PR_YELLOW}%D{%H:%M:%S}\
