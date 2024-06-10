@@ -18,7 +18,7 @@ plugins=(git systemd)
 source $ZSH/oh-my-zsh.sh
 
 # Configure vim mode
-bindkey -v
+bindkey -e
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 

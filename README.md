@@ -18,3 +18,4 @@ I like manual configs :]
 - [ ] Look into zinit and ohmyposh more
 - [ ] Can ohmyposh be used with ohmyzsh?
 - [ ] Move git branch name to top of prompt bar (or not, idk)
+- [ ] Disable vim mode and configure ctrl+x ctrl+e with VIM not NEOVIM
