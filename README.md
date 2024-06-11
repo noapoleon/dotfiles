@@ -38,6 +38,11 @@ I like manual configs :]
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (tmux too)
+- [x] vim-tmux-navigator not working under pipenv shell
+- [ ] make pull request for pipenv shell + nvim + tmux issue with vim-tmux-navigator for is_vim regex
+- [ ] live_grep telescope change max-depth
+- [ ] maybe make noavim fork lol, would need to actually configure it well before that
+- [ ] Properly configure python pyright lsp (not working with django rn, giving erros when there is none in the code and dumb warnings)
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)

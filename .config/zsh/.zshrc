@@ -14,7 +14,7 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 ZSH_THEME="noapoleon"
 
 # Plugins
-plugins=(git systemd)
+plugins=(git systemd tmux)
 
 # sourcing oh-my-zsh config
 source $ZSH/oh-my-zsh.sh
