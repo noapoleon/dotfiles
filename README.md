@@ -10,7 +10,6 @@ I like manual configs :]
 # Todo
 ### System
 - [ ] install arch on spare ssd again
-- 
 
 ### Repo
 - [ ] Better README.md:
@@ -33,8 +32,8 @@ I like manual configs :]
 - [ ] install script options:
     - [ ] backup directory option: ./install --backup=<dir>
     - [x] install neovim locally in .local/bin
-    - more error detection and messages
-    - copy tmuxifier session layout for coding
+    - [ ] more error detection and messages
+    - [ ] copy tmuxifier session layout for coding
 
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work
