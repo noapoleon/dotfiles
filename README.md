@@ -47,3 +47,13 @@ I like manual configs :]
 - [ ] Can ohmyposh be used with ohmyzsh?
 - [ ] Move git branch name to top of prompt bar
 - [x] Disable vim mode ~~and configure ctrl+x ctrl+e with VIM not NEOVIM~~
+- [ ] ZSH theme:
+    - [ ] dynamic prompt info that displays more stuff if window is wide enough
+    - [ ] start theme from scratch now that i know better how it works
+    - [ ] supports:
+        - [x] python venv
+        - [ ] git branch
+        - [ ] git info about commits, updated files, etc.
+        - [ ] time (and date maybe?)
+        - [ ] username, hostname, tty maybe
+        - [ ] unfinished lines e.g: quotations, backslashes, etc.
