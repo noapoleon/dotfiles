@@ -10,6 +10,7 @@ I like manual configs :]
 # Todo
 ### Repo
 - [ ] Better README.md formatting, add links, images, etc.
+- [ ] Add python deps: python3 python3-pip python3-pipenv
 
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work

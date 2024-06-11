@@ -17,10 +17,15 @@ plugins=(git systemd)
 # sourcing oh-my-zsh config
 source $ZSH/oh-my-zsh.sh
 
-# Configure vim mode
+## Configure vim mode
+##bindkey -M vicmd "k" up-line-or-beginning-search
+##bindkey -M vicmd "j" down-line-or-beginning-search
+
+# emacs mode
 bindkey -e
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
+# History settings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
 # Functions (move to file)
 bak() {
