@@ -5,8 +5,10 @@ export EDITOR=$HOME/.local/bin/nvim
 export NNN_USE_EDITOR=1
 export PATH="$HOME/.local/bin:$PATH"
 export CURSUS="$HOME/Coding/42"
-export PROJ="$CURSUS/06-ft_transcendence/django_test"
+export PROJ="$CURSUS/06-ft_transcendence/django_test/mosh"
 export DOTFILES="$HOME/Dotfiles"
+export VIRTUAL_ENV_DISABLE_PROMPT="yes"
+export ZSH_CUSTOM="$ZDOTDIR/custom"
 
 # Select custom theme
 ZSH_THEME="noapoleon"

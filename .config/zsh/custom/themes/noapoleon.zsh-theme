@@ -4,7 +4,11 @@ function theme_precmd {
   PR_FILLBAR=""
   PR_PWDLEN=""
 
-  local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+  if [[ -z "$VIRTUAL_ENV" ]]; then
+    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+  else
+    local promptsize=${#${(%):---(%n@%m:%l)-(${VIRTUAL_ENV_PROMPT})--()--}}
+  fi
   local rubypromptsize=${#${(%)$(ruby_prompt_info)}}
   local pwdsize=${#${(%):-%~}}
 
@@ -103,7 +107,7 @@ fi
 PROMPT='${PR_SET_CHARSET}${PR_STITLE}${(e)PR_TITLEBAR}\
 ${PR_GREY}${PR_ULCORNER}${PR_HBAR}${PR_GREY}[\
 ${PR_GREEN}%${PR_PWDLEN}<...<%~%<<\
-${PR_GREY}]$(ruby_prompt_info)${PR_GREY}${PR_HBAR}${PR_HBAR}${(e)PR_FILLBAR}${PR_HBAR}${PR_GREY}[\
+${PR_GREY}]$(ruby_prompt_info)${PR_GREY}${PR_HBAR}${VIRTUAL_ENV:+($VIRTUAL_ENV_PROMPT)}${PR_HBAR}${(e)PR_FILLBAR}${PR_HBAR}${PR_GREY}[\
 ${PR_CYAN}%(!.%SROOT%s.%n)${PR_GREY}@${PR_GREEN}%m:%l\
 ${PR_GREY}]${PR_GREY}${PR_HBAR}${PR_URCORNER}\
 
@@ -119,5 +123,6 @@ RPROMPT=' $return_code${PR_GREY}${PR_HBAR}${PR_GREY}\
 
 PS2='${PR_GREY}${PR_HBAR}\
 ${PR_BLUE}${PR_HBAR}(\
+- 
 ${PR_LIGHT_GREEN}%_${PR_BLUE})${PR_HBAR}\
 ${PR_GREY}${PR_HBAR}${PR_NO_COLOUR} '
