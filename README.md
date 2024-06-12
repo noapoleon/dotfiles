@@ -43,6 +43,7 @@ I like manual configs :]
 - [ ] live_grep telescope change max-depth
 - [ ] maybe make noavim fork lol, would need to actually configure it well before that
 - [ ] Properly configure python pyright lsp (not working with django rn, giving erros when there is none in the code and dumb warnings)
+- [x] toggle tree with <leader>N
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
@@ -62,3 +63,11 @@ I like manual configs :]
         - [ ] time (and date maybe?)
         - [ ] username, hostname, tty maybe
         - [ ] unfinished lines e.g: quotations, backslashes, etc.
+- [ ] XDG configs:
+    - [ ] python history and similar stuff
+    - [ ] .npm
+    - [ ] .gitconfig
+    - [ ] .ssh
+    - [ ] .vim and .viminfo (without interfering with nvim)
+    - [ ] wget-hsts
+    - [ ] .zshenv (change skeleton or whatnot in etc)
