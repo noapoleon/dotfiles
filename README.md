@@ -44,6 +44,7 @@ I like manual configs :]
 - [ ] maybe make noavim fork lol, would need to actually configure it well before that
 - [ ] Properly configure python pyright lsp (not working with django rn, giving erros when there is none in the code and dumb warnings)
 - [x] toggle tree with <leader>N
+- [ ] diagnose nvim very slow on single line file (lsp? treesitter?)
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
