@@ -5,7 +5,7 @@ export EDITOR=$HOME/.local/bin/nvim
 export NNN_USE_EDITOR=1
 export PATH="$HOME/.local/bin:$PATH"
 export CURSUS="$HOME/Coding/42"
-export PROJ="$CURSUS/06-ft_transcendence/django_test/corey/corey_tuto"
+export PROJ="$CURSUS/06-ft_transcendence/ft_transcendence"
 export DOTFILES="$HOME/Dotfiles"
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
@@ -52,6 +52,7 @@ alias coding="tmuxifier s coding"
 alias dots="cd $DOTFILES"
 alias py="python3"
 alias python="python3"
+alias gstuno="git status -uno"
 # Temp Aliases
 
 # Load tmux

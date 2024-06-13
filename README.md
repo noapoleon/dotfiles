@@ -45,6 +45,7 @@ I like manual configs :]
 - [ ] Properly configure python pyright lsp (not working with django rn, giving erros when there is none in the code and dumb warnings)
 - [x] toggle tree with <leader>N
 - [ ] diagnose nvim very slow on single line file (lsp? treesitter?)
+- [ ] file search and livegrep (telescope) not using hidden/dot files for search
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
@@ -72,3 +73,4 @@ I like manual configs :]
     - [ ] .vim and .viminfo (without interfering with nvim)
     - [ ] wget-hsts
     - [ ] .zshenv (change skeleton or whatnot in etc)
+- [ ] zshrc alias should prompt to source .zshrc file upon exiting editor with [y/N]
