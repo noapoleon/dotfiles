@@ -74,3 +74,10 @@ I like manual configs :]
     - [ ] wget-hsts
     - [ ] .zshenv (change skeleton or whatnot in etc)
 - [ ] zshrc alias should prompt to source .zshrc file upon exiting editor with [y/N]
+- look into these plugins:
+    - [ ] [zsh-navigation-tools](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-navigation-tools)
+    - [ ] [vi-mode](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode)
+    - [ ] [virtualenv](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv)
+    - [ ] [vim-interaction](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vim-interaction)
+    - [x] [zsh-interactive-cd](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-interactive-cd)
+

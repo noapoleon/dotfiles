@@ -9,12 +9,13 @@ export PROJ="$CURSUS/06-ft_transcendence/ft_transcendence"
 export DOTFILES="$HOME/Dotfiles"
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Select custom theme
 ZSH_THEME="noapoleon"
 
 # Plugins
-plugins=(git systemd tmux)
+plugins=(zsh-interactive-cd git systemd tmux)
 
 # sourcing oh-my-zsh config
 source $ZSH/oh-my-zsh.sh
@@ -52,7 +53,9 @@ alias coding="tmuxifier s coding"
 alias dots="cd $DOTFILES"
 alias py="python3"
 alias python="python3"
-alias gstuno="git status -uno"
+alias gstt="git status -uno"
+alias l="ls -lahH"
+unalias tmux # fix 42
 # Temp Aliases
 
 # Load tmux
