@@ -46,9 +46,11 @@ I like manual configs :]
 - [x] toggle tree with <leader>N
 - [ ] diagnose nvim very slow on single line file (lsp? treesitter?)
 - [ ] file search and livegrep (telescope) not using hidden/dot files for search
+- [ ] convenient way to resize nvim split windows
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
+- [ ] convenient way to resize tmux panes
 
 ### Zsh
 - [ ] Look into zinit and ohmyposh more
