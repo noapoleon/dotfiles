@@ -11,6 +11,7 @@ export DOTFILES="$HOME/Dotfiles"
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # Select custom theme
 ZSH_THEME="noapoleon"
