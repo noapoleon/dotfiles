@@ -5,7 +5,8 @@ export EDITOR=$HOME/.local/bin/nvim
 export NNN_USE_EDITOR=1
 export PATH="$HOME/.local/bin:$PATH"
 export CURSUS="$HOME/Coding/42"
-export PROJ="$CURSUS/06-ft_transcendence/ft_transcendence"
+export PROJ="$CURSUS/05-inception/inception"
+export PROJ2="$CURSUS/06-ft_transcendence/ft_transcendence"
 export DOTFILES="$HOME/Dotfiles"
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
@@ -49,6 +50,7 @@ alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --sho
 alias valfrd="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 alias cursus="cd $CURSUS"
 alias proj="cd $PROJ"
+alias proj2="cd $PROJ2"
 alias coding="tmuxifier s coding"
 alias dots="cd $DOTFILES"
 alias py="python3"

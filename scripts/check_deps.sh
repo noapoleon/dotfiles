@@ -11,7 +11,6 @@ for str in "${deps[@]}" ; do
 		printf " ${COL_ERR}-${COL_RST} ${str}\n"
 	fi
 done
-if [[ $has_all_deps = false ]]; then
-	halt_install
+if [[ $has_all_deps = true ]]; then
+	printf "All good.\n"
 fi
-printf "All good.\n"
