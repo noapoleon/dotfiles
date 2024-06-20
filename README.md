@@ -28,6 +28,7 @@ I like manual configs :]
     - [x] docker
     - [ ] separate manually installed deps from apt installed
     - [ ] prompt install_xxxxx.sh scripts from check_deps.sh maybe?
+    - [ ] figure out how to check libraries like fuse and ripgrep, command name is not the same or smth
 - [ ] separate main install script into multiple smaller ones:
     - [x] dependency checker
     - [x] neovim install
