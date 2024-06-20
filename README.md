@@ -7,6 +7,9 @@ I like manual configs :]
  - **Terminal multiplexer**: [tmux](https://github.com/tmux/tmux)
  - **Font**: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads)
 
+> [!WARNING]
+> These dotfiles were made under debian 12, they should work on other distros but haven't been tested for that.
+
 # Todo
 ### System
 - [ ] install arch on spare ssd again
@@ -17,9 +20,14 @@ I like manual configs :]
     - [x] add links
     - [ ] images
     - [ ] Install guide
+    - [ ] collapsable dependencies section with line that says there's a script to install them
 
 ### Install script
-- [ ] Add python deps: python3 python3-pip python3-pipenv
+- [ ] check_deps.sh:
+    - [x] python3 python3-pip python3-pipenv
+    - [x] docker
+    - [ ] separate manually installed deps from apt installed
+    - [ ] prompt install_xxxxx.sh scripts from check_deps.sh maybe?
 - [ ] separate main install script into multiple smaller ones:
     - [x] dependency checker
     - [x] neovim install
@@ -28,12 +36,15 @@ I like manual configs :]
     - [ ] stow linking
     - [ ] oh-my-zsh install + theme
     - [ ] tmux + plugins install
-- [ ] prompt system with `read` in the form of [Y/n] for different components
-- [ ] install script options:
+- [ ] main install script options:
+    - [ ] prompt system with `read` in the form of [Y/n] for different components
     - [ ] backup directory option: ./install --backup=<dir>
     - [x] install neovim locally in .local/bin
     - [ ] more error detection and messages
     - [ ] copy tmuxifier session layout for coding
+- [ ] install_nvim.sh:
+    - [ ] call install_fonts.sh from within maybe?
+- [ ] install_python.sh
 
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work
