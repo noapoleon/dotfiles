@@ -21,6 +21,7 @@ I like manual configs :]
     - [ ] images
     - [ ] Install guide
     - [ ] collapsable dependencies section with line that says there's a script to install them
+- add terminator config for 42
 
 ### Install script
 - [ ] check_deps.sh:
