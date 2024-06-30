@@ -60,6 +60,7 @@ I like manual configs :]
 - [ ] diagnose nvim very slow on single line file (lsp? treesitter?)
 - [ ] file search and livegrep (telescope) not using hidden/dot files for search
 - [ ] convenient way to resize nvim split windows
+- [ ] look into session manager: [reddit post](https://www.reddit.com/r/neovim/comments/szis80/which_session_manager_for_nvim/)
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
