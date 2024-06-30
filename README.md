@@ -70,6 +70,10 @@ I like manual configs :]
 - [ ] Can ohmyposh be used with ohmyzsh?
 - [ ] Move git branch name to top of prompt bar
 - [x] Disable vim mode ~~and configure ctrl+x ctrl+e with VIM not NEOVIM~~
+- [ ] bak command:
+    - [ ] needs to do `cp` by default
+    - [ ] -m option to move instead of copy
+    - [ ] bak -u to `undo`, only works on .bak extensions and if there isn't a file of the same future name
 - [ ] ZSH theme:
     - [ ] dynamic prompt info that displays more stuff if window is wide enough
     - [ ] start theme from scratch now that i know better how it works
