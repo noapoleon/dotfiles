@@ -61,6 +61,8 @@ I like manual configs :]
 - [ ] file search and livegrep (telescope) not using hidden/dot files for search
 - [ ] convenient way to resize nvim split windows
 - [ ] look into session manager: [reddit post](https://www.reddit.com/r/neovim/comments/szis80/which_session_manager_for_nvim/)
+- [ ] keybind to switch tabs
+- [ ] look into buffer switchers
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
