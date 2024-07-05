@@ -43,9 +43,9 @@ alias dots="cd $DOTFILES"
 declare -x -A configs
 configs=(
 	nvim		"$XDG_CONFIG_HOME/nvim"
-	tmux		"$XDG_CONFIG_HOME/tmux"
+	tmux		"$XDG_CONFIG_HOME/tmux/tmux.conf"
 	terminator	"$XDG_CONFIG_HOME/terminator"
-	zsh			"$XDG_CONFIG_HOME/zsh"
+	zsh			"$XDG_CONFIG_HOME/zsh/.zshrc"
 	omz			"$XDG_CONFIG_HOME/oh-my-zsh"
 )
 for key value in ${(@kv)configs}; do
