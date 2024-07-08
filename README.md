@@ -102,4 +102,5 @@ I like manual configs :]
     - [ ] [virtualenv](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv)
     - [ ] [vim-interaction](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vim-interaction)
     - [x] [zsh-interactive-cd](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-interactive-cd)
+- prompt to open or not nvim with conf_xxxx commands if not it just does `cd`
 
