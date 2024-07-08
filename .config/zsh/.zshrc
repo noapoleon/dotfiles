@@ -91,6 +91,7 @@ alias py="python3"
 alias python="python3"
 alias gstt="git status -uno"
 alias l="ls -lahH"
+alias pipenv_purge="rm -rf $HOME/.local/share/virtualenvs/*"
 
 # Load tmux
 eval "$(tmuxifier init -)"
