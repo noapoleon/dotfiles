@@ -80,7 +80,11 @@ I like manual configs :]
     - [ ] bak -u to `undo`, only works on .bak extensions and if there isn't a file of the same future name
 - [ ] ZSH theme:
     - [ ] dynamic prompt info that displays more stuff if window is wide enough
+        - [ ] remove hostname and user info if not wide enough
+        - [ ] simpler icon for python env if not enough room. `-[/current/path/name]-(p)-----`  or similar
+    - [ ] remove current date on the right maybe? 
     - [ ] start theme from scratch now that i know better how it works
+    - [ ] Transient shell pleaaaase
     - [ ] supports:
         - [x] python venv
         - [ ] git branch
