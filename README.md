@@ -46,6 +46,8 @@ I like manual configs :]
     - [ ] copy tmuxifier session layout for coding
 - [ ] install_nvim.sh:
     - [ ] call install_fonts.sh from within maybe?
+- [ ] install_glow.sh:
+    - [ ] make local install
 - [ ] install_python.sh
 - [ ] symbolic link from `bat -> /usr/bin/batcat` or maybe an alias
 
