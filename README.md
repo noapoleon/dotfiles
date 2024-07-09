@@ -47,6 +47,7 @@ I like manual configs :]
 - [ ] install_nvim.sh:
     - [ ] call install_fonts.sh from within maybe?
 - [ ] install_python.sh
+- [ ] symbolic link from `bat -> /usr/bin/batcat` or maybe an alias
 
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work
