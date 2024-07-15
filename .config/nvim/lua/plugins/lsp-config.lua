@@ -17,8 +17,8 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"clangd",
-					"ast_grep",
-					"pyright",
+					--"ast_grep",
+					--"pyright",
 					-- "mypy",
 					-- "ruff",
 				},
@@ -34,8 +34,8 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
 			lspconfig.clangd.setup({})
-			lspconfig.ast_grep.setup({})
-			lspconfig.pyright.setup({})
+			--lspconfig.ast_grep.setup({})
+			--lspconfig.pyright.setup({})
 			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
 			vim.keymap.set({'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})

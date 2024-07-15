@@ -50,6 +50,7 @@ I like manual configs :]
     - [ ] make local install
 - [ ] install_python.sh
 - [ ] symbolic link from `bat -> /usr/bin/batcat` or maybe an alias
+- [ ] install script for lazydocker
 
 ### Nvim
 - [ ] Investigate alternatives to neo-tree, fuzzy-finder doesn't seem to work

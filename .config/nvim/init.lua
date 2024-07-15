@@ -12,8 +12,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("vim-options")
+-- Changing Leader
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
+
 require("lazy").setup("plugins")
+require("vim-options")
+
+vim.keymap.set('n', '<leader>=', ":set autoindent noexpandtab tabstop=4 shiftwidth=4<CR>:%retab!<CR>")
 
 -- General keybinds
 vim.keymap.set('n', '<leader>l', ":Lazy<CR>", {})
