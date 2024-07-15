@@ -67,6 +67,7 @@ I like manual configs :]
 - [ ] look into session manager: [reddit post](https://www.reddit.com/r/neovim/comments/szis80/which_session_manager_for_nvim/)
 - [ ] keybind to switch tabs
 - [ ] look into buffer switchers
+- [ ] look into ftplugin and how to disable its bullshit or overwrite it
 
 ### Tmux
 - [ ] Figure out how to handle copy and paste both in ssh and normal terminal (nvim too)
