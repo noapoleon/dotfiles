@@ -64,6 +64,9 @@ else
 fi
 if [[ $LOCATION == "42" ]]; then
 	unalias tmux
+	if ! [[ -L $HOME/media ]]; then
+		ln -s /media/nlegrand $HOME/media
+	fi
 fi
 # Project management
 export CURSUS="$HOME/Coding/42"

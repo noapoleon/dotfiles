@@ -9,7 +9,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Disable mouse mode
-vim.opt.mouse = ""
+--vim.opt.mouse = ""
 
 -- Indentation settings
 vim.opt.autoindent = true
