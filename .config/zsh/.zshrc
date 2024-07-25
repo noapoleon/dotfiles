@@ -20,11 +20,12 @@ plugins=(zsh-interactive-cd git systemd tmux)
 source $ZSH/oh-my-zsh.sh
 
 ## Configure vim mode
-##bindkey -M vicmd "k" up-line-or-beginning-search
-##bindkey -M vicmd "j" down-line-or-beginning-search
+bindkey -v
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
 
 # emacs mode
-bindkey -e
+#bindkey -e
 # History settings
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -50,9 +51,11 @@ configs=(
 )
 for key value in ${(@kv)configs}; do
 	if [[ $key == "zsh" ]]; then
-		alias conf_$key="$EDITOR $value && source $value && printf \"$configs[zsh] has been sourced\n\""
+		alias ${key}_conf="$EDITOR $value && source $value && printf \"$configs[zsh] has been sourced\n\""
+		alias conf_${key}=${key}_conf
 	else
-		alias conf_$key="$EDITOR $value"
+		alias ${key}_conf="$EDITOR $value"
+		alias conf_${key}=${key}_conf
 	fi
 done
 
@@ -73,16 +76,18 @@ export CURSUS="$HOME/Coding/42"
 alias cursus="cd $CURSUS"
 declare -x -A projects
 projects=(
-	trans		"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/ft_transcendence" || printf "$CURSUS/06-ft_transcendence/ft_transcendence")"
-	inception	"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/inception" || printf "$CURSUS/05-inception/inception")"
-	libft		"$CURSUS/00-libft/libft"
+	ft_transcendence	"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/ft_transcendence" || printf "$CURSUS/06-ft_transcendence/ft_transcendence")"
+	inception			"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/inception" || printf "$CURSUS/05-inception/inception")"
+	libft				"$CURSUS/00-libft/libft"
+	exam				"$CURSUS/exams"
 )
 # make fzf interactive menu instead of aliases
 for key value in ${(@kv)projects}; do
 	alias proj_$key="cd $value" # add $EDITOR prompt with read [Y\n] thingy`
 done
 # Current project
-alias proj=proj_trans
+alias proj=proj_exam
+alias proj2=proj_transcendence
 
 
 # Aliases
@@ -96,6 +101,7 @@ alias gstt="git status -uno"
 alias l="ls -lahH"
 alias pipenv_purge="rm -rf $HOME/.local/share/virtualenvs/*"
 alias bat="batcat"
+alias zshrcs="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
 # Load tmux
 eval "$(tmuxifier init -)"
