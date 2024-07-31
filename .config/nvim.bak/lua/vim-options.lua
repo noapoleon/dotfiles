@@ -1,6 +1,6 @@
 -- Noa Custom Config
 --vim.cmd("set noexpandtab")
-vim.opt.expandtab	= false
+vim.opt.expandtab = false
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.wrap = false
