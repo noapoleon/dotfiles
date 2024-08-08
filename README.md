@@ -26,6 +26,7 @@ I like manual configs :]
 ### Install script
 - [ ] check_deps.sh:
     - [x] python3 python3-pip python3-pipenv
+	- [ ] pyenv thing
     - [x] docker
     - [ ] separate manually installed deps from apt installed
     - [ ] prompt install_xxxxx.sh scripts from check_deps.sh maybe?

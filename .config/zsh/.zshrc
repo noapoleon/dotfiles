@@ -3,12 +3,24 @@ export ZSH="$HOME/.config/oh-my-zsh"
 export HISTFILE=$HOME/.config/zsh/.zsh_history
 export EDITOR=$HOME/.local/bin/nvim
 export NNN_USE_EDITOR=1
-export PATH="$HOME/.local/bin:$PATH"
 export DOTFILES="$HOME/Dotfiles"
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
+
+# XDG setup
+# Doc: https://specifications.freedesktop.org/basedir-spec/latest/
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+# XDG_RUNTIME_DIR ???
+
+# PATH management (zsh's `path` array is synced with PATH)
+path=(
+	"$HOME/.local/bin/"
+	$path
+)
+export PATH
 
 # Select custom theme
 ZSH_THEME="noapoleon"
@@ -102,6 +114,11 @@ alias l="ls -lahH"
 alias pipenv_purge="rm -rf $HOME/.local/share/virtualenvs/*"
 alias bat="batcat"
 alias zshrcs="source $XDG_CONFIG_HOME/zsh/.zshrc"
+
+# Python setup
+export PYENV_ROOT="$HOME/.config/pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Load tmux
 eval "$(tmuxifier init -)"
