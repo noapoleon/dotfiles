@@ -116,9 +116,11 @@ alias bat="batcat"
 alias zshrcs="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
 # Python setup
-export PYENV_ROOT="$HOME/.config/pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if type pyenv > /dev/null; then
+	export PYENV_ROOT="$HOME/.config/pyenv"
+	[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+	eval "$(pyenv init -)"
+fi
 
 # Load tmux
 eval "$(tmuxifier init -)"
