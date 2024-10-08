@@ -60,6 +60,7 @@ configs=(
 	terminator	"$XDG_CONFIG_HOME/terminator"
 	zsh			"$XDG_CONFIG_HOME/zsh/.zshrc"
 	omz			"$XDG_CONFIG_HOME/oh-my-zsh"
+	web			"/etc/nginx/sites-available/default"
 )
 for key value in ${(@kv)configs}; do
 	if [[ $key == "zsh" ]]; then
@@ -114,6 +115,12 @@ alias l="ls -lahH"
 alias pipenv_purge="rm -rf $HOME/.local/share/virtualenvs/*"
 alias bat="batcat"
 alias zshrcs="source $XDG_CONFIG_HOME/zsh/.zshrc"
+alias web="cd /var/www/html"
+alias webtest="cd /var/www/test"
+#alias web3="cd /var/www/w3"
+alias wimi="curl -4 ifconfig.me"
+alias wimi4="curl -4 ifconfig.me"
+alias wimi6="curl -6 ifconfig.me"
 
 # Python setup
 if type pyenv > /dev/null; then
