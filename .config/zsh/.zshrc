@@ -13,7 +13,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
-# XDG_RUNTIME_DIR ???
+# XDG manual homes
+export PYENV_ROOT=$XDG_DATA_HOME/pyenv
 
 # PATH management (zsh's `path` array is synced with PATH)
 path=(
@@ -66,6 +67,9 @@ for key value in ${(@kv)configs}; do
 	if [[ $key == "zsh" ]]; then
 		alias ${key}_conf="$EDITOR $value && source $value && printf \"$configs[zsh] has been sourced\n\""
 		alias conf_${key}=${key}_conf
+	elif [[ $key == "web" ]]; then
+		alias ${key}_conf="sudo vim /etc/nginx/sites-available/default && sudo nginx -s reload"
+		alias conf_${key}=${key}_conf
 	else
 		alias ${key}_conf="$EDITOR $value"
 		alias conf_${key}=${key}_conf
@@ -92,7 +96,7 @@ projects=(
 	ft_transcendence	"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/ft_transcendence" || printf "$CURSUS/06-ft_transcendence/ft_transcendence")"
 	inception			"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/inception" || printf "$CURSUS/05-inception/inception")"
 	libft				"$CURSUS/00-libft/libft"
-  python      "$CURSUS/piscine_python/"
+  	python      "$CURSUS/piscine_python/"
 )
 # make fzf interactive menu instead of aliases
 for key value in ${(@kv)projects}; do
@@ -100,11 +104,11 @@ for key value in ${(@kv)projects}; do
 done
 # Current project
 alias proj=proj_python
-alias proj2=proj_transcendence
+#alias proj2=proj_transcendence
 
 
 # Aliases
-alias c="clear"
+alias c="clear -x"
 alias valf="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all -s"
 alias valfrd="valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./leak_readline.supp"
 alias coding="tmuxifier s coding"
@@ -114,7 +118,7 @@ alias gstt="git status -uno"
 alias l="ls -lahH"
 alias pipenv_purge="rm -rf $HOME/.local/share/virtualenvs/*"
 alias bat="batcat"
-alias zshrcs="source $XDG_CONFIG_HOME/zsh/.zshrc"
+alias source_zshrc="source $XDG_CONFIG_HOME/zsh/.zshrc"
 alias web="cd /var/www/html"
 alias webtest="cd /var/www/test"
 #alias web3="cd /var/www/w3"
@@ -123,11 +127,11 @@ alias wimi4="curl -4 ifconfig.me"
 alias wimi6="curl -6 ifconfig.me"
 
 # Python setup
-if type pyenv > /dev/null; then
-	export PYENV_ROOT="$HOME/.config/pyenv"
+if ! type pyenv > /dev/null; then
 	[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 	eval "$(pyenv init -)"
 fi
+alias norminette=flake8
 
 # Load tmux
 eval "$(tmuxifier init -)"

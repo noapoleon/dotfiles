@@ -7,3 +7,9 @@ vim.opt.expandtab = false
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.wrap = false
+
+-- fix: opening directory sometimes wrong one
+vim.g.root_spec = { "cwd" }
+
+-- fix: annoying autoformat
+vim.g.autoformat = false
