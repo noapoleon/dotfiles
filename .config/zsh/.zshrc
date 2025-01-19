@@ -96,14 +96,14 @@ projects=(
 	ft_transcendence	"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/ft_transcendence" || printf "$CURSUS/06-ft_transcendence/ft_transcendence")"
 	inception			"$( [[ $LOCATION == "42" ]] && printf "$HOME/goinfre/inception" || printf "$CURSUS/05-inception/inception")"
 	libft				"$CURSUS/00-libft/libft"
-  	python      "$CURSUS/piscine_python/"
+  	python      "$CURSUS/piscine_python/python01"
 )
 # make fzf interactive menu instead of aliases
 for key value in ${(@kv)projects}; do
 	alias proj_$key="cd $value" # add $EDITOR prompt with read [Y\n] thingy`
 done
 # Current project
-alias proj=proj_python/python01
+alias proj=proj_python
 #alias proj2=proj_transcendence
 
 
