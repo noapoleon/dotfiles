@@ -1,3 +1,8 @@
 # Zsh stuff
 .zcompdump*
 .zsh_history
+
+# Configs
+.config/tmux/plugins/
+.config/oh-my-zsh/
+.config/discord/

@@ -103,7 +103,7 @@ for key value in ${(@kv)projects}; do
 	alias proj_$key="cd $value" # add $EDITOR prompt with read [Y\n] thingy`
 done
 # Current project
-alias proj=proj_python
+alias proj=proj_python/python01
 #alias proj2=proj_transcendence
 
 

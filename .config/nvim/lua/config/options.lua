@@ -7,6 +7,8 @@ vim.opt.expandtab = false
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.wrap = false
+-- Color Column
+vim.opt.colorcolumn = "80,100,120"
 
 -- fix: opening directory sometimes wrong one
 vim.g.root_spec = { "cwd" }
